@@ -1,29 +1,40 @@
 import { Checkbox, FormControlLabel, FormGroup, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
-import { ActiveButton, AuthButton, MyLink, PrimaryTextField } from "../../base";
+import { ActiveButton, MyLink, PrimaryTextField } from "../../base";
 import { Apple, Google, Microsoft, RemoveRedEyeOutlined, VisibilityOff } from "@mui/icons-material";
-import { Ilogin } from "./Login.types";
+import { AuthButton } from "../../base";
+import { ISignup } from "./Signup.types";
 
 const pointerStyle = {
     cursor: 'pointer'
 }
 
-const Login = ({
+const Signup = ({
     handleSubmit,
     error
-}: Ilogin) => {
+}: ISignup) => {
     const [watchPassword, setWatchPassword] = React.useState(false);
+    const [watchConfirmPassword, setWatchConfirmPassword] = React.useState(false);
     const [errorMsg, setErrorMsg] = React.useState(error)
 
     const toogleWatchPassword = () => {
         setWatchPassword(prev => !prev);
     }
 
+    const toogleWatchConfirmPassword = () => {
+        setWatchConfirmPassword(prev => !prev);
+    }
+
     const handleFormSubmit = (e: any) => {
         e.preventDefault();
         const email = e.target[0].value
         const password = e.target[2].value
+        const confirmPassword = e.target[4].value
+        if (password !== confirmPassword) {
+            setErrorMsg('Password does not match')
+            return;
+        }
         const keep = e.target[4].checked
         if (handleSubmit)
             handleSubmit({ email, password, keep })
@@ -57,9 +68,9 @@ const Login = ({
                 }}
             >
                 <Typography fontSize={'30px'} fontWeight={'600'}>
-                    Login
+                    Signup
                 </Typography>
-                <MyLink to={'/sign-up'} text="Don't have an account?" underline={false} />
+                <MyLink to={'/sign-up'} text="Already have an account?" underline={false} />
             </Box>
 
             <Box
@@ -101,6 +112,25 @@ const Login = ({
 
             <Box
                 sx={{
+                    width: '100%',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '10px'
+                }}
+            >
+                <Typography>
+                    Confirm Password
+                </Typography>
+                <PrimaryTextField
+                    placeholder="Enter password*"
+                    type={!watchConfirmPassword ? "password" : "text"}
+                    endingicon={!watchConfirmPassword ? <RemoveRedEyeOutlined sx={pointerStyle} onClick={toogleWatchConfirmPassword} /> : <VisibilityOff sx={pointerStyle} onClick={toogleWatchConfirmPassword} />}
+                    required={true}
+                />
+            </Box>
+
+            <Box
+                sx={{
                     display: 'flex',
                     justifyContent: 'space-between',
                     alignItems: 'center',
@@ -108,15 +138,14 @@ const Login = ({
                 }}
             >
                 <FormGroup>
-                    <FormControlLabel control={<Checkbox />} label="Keep me signed in" />
+                    <FormControlLabel control={<Checkbox defaultChecked />} label="Keep me signed in" />
                 </FormGroup>
 
-                <MyLink to={'/forgot-password'} text="Forgot password?" underline={false} />
             </Box>
 
             {errorMsg && <Typography color={'error'}>{errorMsg}</Typography>}
 
-            <ActiveButton text="Log In" fullWidth type="submit" />
+            <ActiveButton text="Sign up" fullWidth type="submit" />
 
             <hr />
 
@@ -144,4 +173,4 @@ const Login = ({
     )
 }
 
-export default Login;
+export default Signup;
