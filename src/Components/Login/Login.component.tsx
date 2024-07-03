@@ -125,40 +125,45 @@ const Login = ({
 
             <ActiveButton text="Log In" fullWidth type="submit" />
 
-            <Divider sx={{ width: '80%' }} />
+            {
+                allowThirdParty &&
+                <>
+                    <Divider sx={{ width: '80%' }} />
 
-            <Box
-                sx={{
-                    width: '100%',
-                    display: 'flex',
-                    justifyContent: 'center'
-                }}
-            >
-                <Box
-                    sx={{
-                        width: '90%',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        gap: '10px'
-                    }}
-                >
-                    <AuthButton
-                        text="Continue with Google"
-                        authIcon={<Google />}
-                        onClick={onGoogleClick}
-                    />
-                    <AuthButton
-                        text="Continue with Microsoft Account"
-                        authIcon={<Microsoft />}
-                        onClick={onMicrosoftClick}
-                    />
-                    <AuthButton
-                        text="Continue with Apple"
-                        authIcon={<Apple />}
-                        onClick={onAppleClick}
-                    />
-                </Box>
-            </Box>
+                    <Box
+                        sx={{
+                            width: '100%',
+                            display: 'flex',
+                            justifyContent: 'center'
+                        }}
+                    >
+                        <Box
+                            sx={{
+                                width: '90%',
+                                display: 'flex',
+                                flexDirection: 'column',
+                                gap: '10px'
+                            }}
+                        >
+                            <AuthButton
+                                text="Continue with Google"
+                                authIcon={<Google />}
+                                onClick={onGoogleClick}
+                            />
+                            <AuthButton
+                                text="Continue with Microsoft Account"
+                                authIcon={<Microsoft />}
+                                onClick={onMicrosoftClick}
+                            />
+                            <AuthButton
+                                text="Continue with Apple"
+                                authIcon={<Apple />}
+                                onClick={onAppleClick}
+                            />
+                        </Box>
+                    </Box>
+                </>
+            }
         </Box>
     )
 }
