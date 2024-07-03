@@ -1,7 +1,7 @@
 export interface IAuthButton {
     authIcon?: React.ReactNode,
     text: string,
-    onClick: () => void,
+    onClick?: () => void,
     fullWidth?: boolean,
     loading?: boolean,
     disabled?: boolean,

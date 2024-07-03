@@ -1,4 +1,8 @@
 export interface ISignup {
     handleSubmit?: Function,
-    error?: string
+    error?: string,
+    allowThirdParty?: boolean,
+    onGoogleClick?: () => void,
+    onMicrosoftClick?: () => void,
+    onAppleClick?: () => void
 }

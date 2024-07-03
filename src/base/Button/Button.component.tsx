@@ -20,7 +20,7 @@ const ActiveButton = ({
             color: 'white',
             borderRadius: "5px",
             backgroundColor: '#4c78ae',
-            textTransform: "capitalize",
+            textTransform: "none",
             ":hover": {
                 backgroundColor: '#4c78ae',
             },

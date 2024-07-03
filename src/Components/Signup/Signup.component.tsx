@@ -1,4 +1,4 @@
-import { Checkbox, FormControlLabel, FormGroup, Typography } from "@mui/material";
+import { Checkbox, Divider, FormControlLabel, FormGroup, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
 import { ActiveButton, MyLink, PrimaryTextField } from "../../base";
@@ -12,7 +12,11 @@ const pointerStyle = {
 
 const Signup = ({
     handleSubmit,
-    error
+    error,
+    allowThirdParty,
+    onGoogleClick,
+    onMicrosoftClick,
+    onAppleClick
 }: ISignup) => {
     const [watchPassword, setWatchPassword] = React.useState(false);
     const [watchConfirmPassword, setWatchConfirmPassword] = React.useState(false);
@@ -147,30 +151,51 @@ const Signup = ({
 
             <ActiveButton text="Sign up" fullWidth type="submit" />
 
-            <hr />
+            {
+                allowThirdParty &&
+                <>
+                    <Divider sx={{ width: '80%' }} />
 
-            <Box
-                sx={{
-                    width: '100%',
-                    display: 'flex',
-                    justifyContent: 'center'
-                }}
-            >
-                <Box
-                    sx={{
-                        width: '90%',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        gap: '10px'
-                    }}
-                >
-                    <AuthButton text="Continue with Google" onClick={() => { }} authIcon={<Google />} />
-                    <AuthButton text="Continue with Microsoft Account" onClick={() => { }} authIcon={<Microsoft />} />
-                    <AuthButton text="Continue with Apple" onClick={() => { }} authIcon={<Apple />} />
-                </Box>
-            </Box>
+                    <Box
+                        sx={{
+                            width: '100%',
+                            display: 'flex',
+                            justifyContent: 'center'
+                        }}
+                    >
+                        <Box
+                            sx={{
+                                width: '90%',
+                                display: 'flex',
+                                flexDirection: 'column',
+                                gap: '10px'
+                            }}
+                        >
+                            <AuthButton
+                                text="Continue with Google"
+                                authIcon={<Google />}
+                                onClick={onGoogleClick}
+                            />
+                            <AuthButton
+                                text="Continue with Microsoft Account"
+                                authIcon={<Microsoft />} 
+                                onClick={onMicrosoftClick}
+                                />
+                            <AuthButton
+                                text="Continue with Apple"
+                                authIcon={<Apple />} 
+                                onClick={onAppleClick}
+                                />
+                        </Box>
+                    </Box>
+                </>
+            }
         </Box>
     )
+}
+
+Signup.defaultProps = {
+    allowThirdParty: false
 }
 
 export default Signup;

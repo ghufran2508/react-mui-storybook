@@ -21,8 +21,9 @@ const AuthButton = ({
             borderRadius: '10px',
             border: '1px solid grey',
             p: 2,
-            textAlign: 'start',
-            justifyContent: 'flex-start'
+            justifyContent: 'flex-start',
+            color: 'black',
+            textTransform: 'none'
         }}
     >
         {}

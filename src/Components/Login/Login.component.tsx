@@ -1,8 +1,11 @@
-import { Checkbox, FormControlLabel, FormGroup, Typography } from "@mui/material";
+import { Checkbox, Divider, FormControlLabel, FormGroup, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
 import { ActiveButton, AuthButton, MyLink, PrimaryTextField } from "../../base";
 import { Apple, Google, Microsoft, RemoveRedEyeOutlined, VisibilityOff } from "@mui/icons-material";
+// import Apple from './../../Utils/Icons/apple.jpg'
+// import Google from './../../Utils/Icons/google.png'
+// import Microsoft from './../../Utils/Icons/microsoft.png'
 import { Ilogin } from "./Login.types";
 
 const pointerStyle = {
@@ -11,7 +14,11 @@ const pointerStyle = {
 
 const Login = ({
     handleSubmit,
-    error
+    error,
+    allowThirdParty,
+    onGoogleClick,
+    onMicrosoftClick,
+    onAppleClick
 }: Ilogin) => {
     const [watchPassword, setWatchPassword] = React.useState(false);
     const [errorMsg, setErrorMsg] = React.useState(error)
@@ -33,7 +40,7 @@ const Login = ({
         <Box
             sx={{
                 width: '100vw',
-                maxWidth: '500px',
+                maxWidth: '450px',
                 py: 5,
                 px: 3,
                 display: 'flex',
@@ -118,7 +125,7 @@ const Login = ({
 
             <ActiveButton text="Log In" fullWidth type="submit" />
 
-            <hr />
+            <Divider sx={{ width: '80%' }} />
 
             <Box
                 sx={{
@@ -135,9 +142,21 @@ const Login = ({
                         gap: '10px'
                     }}
                 >
-                    <AuthButton text="Continue with Google" onClick={() => { }} authIcon={<Google />} />
-                    <AuthButton text="Continue with Microsoft Account" onClick={() => { }} authIcon={<Microsoft />} />
-                    <AuthButton text="Continue with Apple" onClick={() => { }} authIcon={<Apple />} />
+                    <AuthButton
+                        text="Continue with Google"
+                        authIcon={<Google />}
+                        onClick={onGoogleClick}
+                    />
+                    <AuthButton
+                        text="Continue with Microsoft Account"
+                        authIcon={<Microsoft />}
+                        onClick={onMicrosoftClick}
+                    />
+                    <AuthButton
+                        text="Continue with Apple"
+                        authIcon={<Apple />}
+                        onClick={onAppleClick}
+                    />
                 </Box>
             </Box>
         </Box>
